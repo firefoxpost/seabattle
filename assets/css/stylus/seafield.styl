@@ -1,0 +1,30 @@
+.seafield 
+  width:260px
+  height:259px
+  border:1px solid $fieldBorderColor
+  border-right-width:0px
+  margin:0 50px 0 10px
+  overflow:hidden
+  float:left
+
+  span
+    border-right:1px solid $spanBorderColor
+    border-bottom:1px solid $spanBorderColor
+    width:25px
+    height:25px
+    cursor:pointer
+    float:left
+
+    &.seagrid
+      background-color:$seaGridBg
+
+    &.sheep
+      background-color:$colorEnabled !important
+
+    &.killed, &.busy
+      background-color:$colorKilled !important
+      cursor:auto
+
+    &.disabled
+      cursor:auto
+      background-color:$colorDisabled !important

@@ -1,0 +1,26 @@
+{
+  "name": "newseafight",
+  "version": "1.0.0",
+  "description": "seafight new version",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp": "^3.9.0"
+  },
+  "devDependencies": {
+    "connect": "^3.4.0",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-csso": "^1.0.1",
+    "gulp-imagemin": "^2.4.0",
+    "gulp-jade": "^1.1.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-myth": "^1.1.0",
+    "gulp-stylus": "^2.1.0",
+    "gulp-uglify": "^1.5.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Iliya",
+  "license": "ISC"
+}
