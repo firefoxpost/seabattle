@@ -42,7 +42,7 @@ gulp.task('js', function () {
   .pipe(plumber())
   .pipe(sourcemaps.init())
   .pipe(concat('script.min.js'))
-  .pipe(uglify())
+  //.pipe(uglify())
   .pipe(sourcemaps.write())
   .pipe(gulp.dest(JS_PATH))
   .pipe(livereload())

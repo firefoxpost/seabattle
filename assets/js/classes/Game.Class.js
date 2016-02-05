@@ -44,8 +44,8 @@ Game.prototype = {
     initShooter: function () {
         var grids = document.getElementById('gamefield_comp').getElementsByTagName('span'),
             $self = this,
-            //TODO Intelligent comp shooting
-            intelligentHit;
+            intelligentHit,
+            intelligent = false;
 
         for(var t=0; t < grids.length; t++) {
             grids[t].addEventListener("click", handleShoot);
@@ -101,12 +101,15 @@ Game.prototype = {
                                     +loggerStr
                                     +enemyFleet[m].name
                                     +" убит!</p>";
+                                    intelligent = false;
 
                             } else {
                                 document.getElementById("countShoot").innerHTML+="<p>"
                                     +loggerStr
                                     +enemyFleet[m].name
                                     +" ранен!</p>";
+                                    intelligent = true;
+                                    intelligentHit = coord;
 
                             }
                             
@@ -127,8 +130,7 @@ Game.prototype = {
                             }
 
                             if (gamer === 'comp') {
-                                //TODO Intelligent comp shooting
-                                compShooter('intelligent');
+                                compShooter(intelligent);
                             }
                             return true;
                             break outer;
@@ -156,14 +158,31 @@ Game.prototype = {
             objDiv.scrollTop = objDiv.scrollHeight;
         }
 
-        function getHitCoord() {
+        function getHitCoord(param) {
             var enemyGrids = $self.getPlayerByRole('comp').getEnemyGrids(),
                 resIndex,
                 result;
+                
+                if (param) {
+                    var intelligentParseCoord = intelligentHit.split(":"),
+                    x = parseInt(intelligentParseCoord[0]),
+                    y = parseInt(intelligentParseCoord[1]),
+                    freeDots = [x+1+":"+y, x-1+":"+y, x+":"+y+1, x+":"+y-1];
 
-                resIndex = Math.floor(Math.random() * ((enemyGrids.length-1) + 1)); // array index
-                result = enemyGrids[resIndex];
+                    for (var m=0; m < freeDots.length; i++) {
+                        resIndex = enemyGrids.indexOf(freeDots[m]);
 
+                        if(resIndex !==-1) {
+                            break;
+                        }
+                    }
+                }
+                else {
+                    resIndex = Math.floor(Math.random() * ((enemyGrids.length-1) + 1)); // array index
+                }
+
+            result = enemyGrids[resIndex];
+            
             $self.getPlayerByRole('comp').removeEnemyGrids(resIndex);
 
             return result;
