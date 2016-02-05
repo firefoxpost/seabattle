@@ -109,7 +109,9 @@ Game.prototype = {
                                     +" ранен!</p>";
 
                             }
-
+                            
+                            scrollLogger();
+                            
                             coords[n].splice(trigger, 1);
 
                             for (var m in enemyFleet) {
@@ -137,6 +139,7 @@ Game.prototype = {
             document.getElementById("countShoot").innerHTML+="<p>" + loggerStr + "Промах!</p>";
             document.getElementById(seaGrid).setAttribute("class", "disabled");
             document.getElementById(seaGrid).removeEventListener("click", handleShoot);
+            scrollLogger();
 
             if (gamer === 'user') {
                 compShooter();
@@ -146,6 +149,11 @@ Game.prototype = {
         function compShooter(param) {
             var compHitCoord = getHitCoord(param);
             anyliseHit(compHitCoord, 'comp');
+        }
+
+        function scrollLogger() {    
+            var objDiv = document.getElementById("countShoot");
+            objDiv.scrollTop = objDiv.scrollHeight;
         }
 
         function getHitCoord() {
@@ -164,7 +172,12 @@ Game.prototype = {
         function finishGame(gamer) {
             document.getElementById('body').setAttribute("style", "visibility:hidden;");
             alert("Игра окончена! Выйграл "+gamer.getName()+" за "+gamer.getShootCounter()+" выстрелов!");
-            return false;
+            document.getElementById('reloadGame').setAttribute("style", "display:inline-block");
+            document.getElementById('reloadGame').addEventListener("click", reloader);
+        }
+
+        function reloader() {
+            location.reload();
         }
 
     }
